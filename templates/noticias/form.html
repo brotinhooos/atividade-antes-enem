@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card"><h2>{{ titulo }}</h2>
+<form method="post" novalidate>{% csrf_token %}
+  {{ form.non_field_errors }}
+  {% for field in form %}
+    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field }}
+    {{ field.errors }}
+  {% endfor %}
+  <p><button class="btn" type="submit">Salvar</button> <a class="btn secondary" href="{% url voltar %}">Cancelar</a></p>
+</form></div>
+{% endblock %}

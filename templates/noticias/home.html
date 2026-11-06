@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card"><h2>Bem-vindo ao Portal Escolar</h2><p>Gerencie as categorias e tags utilizadas na organização das notícias.</p>
+<a class="btn" href="{% url 'categoria_lista' %}">Gerenciar categorias</a>
+<a class="btn" href="{% url 'tag_lista' %}">Gerenciar tags</a></div>
+<div class="card"><h2>Notícias cadastradas</h2>
+{% for noticia in noticias %}<article><h3>{{ noticia.titulo }}</h3><p>{{ noticia.conteudo|truncatewords:30 }}</p><small>Categoria: {{ noticia.categoria }} · Tags: {% for tag in noticia.tags.all %}{{ tag.nome }}{% if not forloop.last %}, {% endif %}{% empty %}Nenhuma{% endfor %}</small></article>{% empty %}<p>Nenhuma notícia cadastrada. Cadastre notícias pela área de administração.</p>{% endfor %}
+</div>
+{% endblock %}
